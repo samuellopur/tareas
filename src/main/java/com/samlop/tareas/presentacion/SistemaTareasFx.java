@@ -36,6 +36,5 @@ public class SistemaTareasFx extends Application {
     public void stop(){
         applicationContext.close();
         Platform.exit();
-
     }
 }
