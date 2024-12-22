@@ -50,6 +50,8 @@ public class IndexControlador implements Initializable {
     @FXML
     private TextField estatusTexto;
 
+    private Integer idTareaInterno;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tareaTabla.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -80,6 +82,7 @@ public class IndexControlador implements Initializable {
         else {
             var tarea = new Tarea();
             recolectarDatosFormulario(tarea);
+            tarea.setIdTarea(null);
             tareaServicio.guardarTarea(tarea);
             mostrarMensaje("Información", "Tarea agregada");
             limpiarFormulario();
@@ -87,13 +90,46 @@ public class IndexControlador implements Initializable {
         }
     }
 
+    public void cargarTareaFormulario(){
+        var tarea = tareaTabla.getSelectionModel().getSelectedItem();
+        if (tarea != null){
+            idTareaInterno = tarea.getIdTarea();
+            nombreTareaTexto.setText(tarea.getNombreTarea());
+            responsableTexto.setText(tarea.getResponsable());
+            estatusTexto.setText(tarea.getEstatus());
+        }
+
+    }
+
     private void recolectarDatosFormulario(Tarea tarea){
+        if (idTareaInterno != null)
+            tarea.setIdTarea(idTareaInterno);
         tarea.setNombreTarea(nombreTareaTexto.getText());
         tarea.setResponsable(responsableTexto.getText());
         tarea.setEstatus(estatusTexto.getText());
     }
 
+    public void modificarTarea(){
+        if (idTareaInterno == null){
+            mostrarMensaje("Información", "Seleccione una tarea");
+            return;
+        }
+        if (nombreTareaTexto.getText().isEmpty()){
+            mostrarMensaje("Error de validación", "Debe proporcionar una tarea");
+            nombreTareaTexto.requestFocus();
+            return;
+        }
+
+        var tarea = new Tarea();
+        recolectarDatosFormulario(tarea);
+        tareaServicio.guardarTarea(tarea);
+        mostrarMensaje("Informacion", "Tarea modificada");
+        limpiarFormulario();
+        listarTareas();
+    }
+
     private void limpiarFormulario(){
+        idTareaInterno = null;
         nombreTareaTexto.clear();
         responsableTexto.clear();
         estatusTexto.clear();

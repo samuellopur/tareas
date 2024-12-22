@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.samlop.tareas.controlador.IndexControlador">
    <children>
@@ -11,7 +10,7 @@
          <font>
             <Font name="System Bold" size="25.0" />
          </font></Label>
-      <TableView fx:id="tareaTabla" layoutX="259.0" layoutY="67.0" prefHeight="209.0" prefWidth="298.0">
+      <TableView fx:id="tareaTabla" layoutX="259.0" layoutY="67.0" onMouseClicked="#cargarTareaFormulario" prefHeight="209.0" prefWidth="298.0">
         <columns>
           <TableColumn fx:id="idTareaColumna" prefWidth="40.800018310546875" text="ID" />
           <TableColumn fx:id="nombreTareaColumna" prefWidth="61.59996795654297" text="Tarea" />
@@ -40,7 +39,7 @@
       <AnchorPane layoutX="31.0" layoutY="299.0" prefHeight="71.0" prefWidth="529.0">
          <children>
             <Button fx:id="agregarBoton" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#agregarTarea" style="-fx-background-color: #1d3557;" text="Agregar" textFill="#f1faee" />
-            <Button fx:id="modificarBoton" layoutX="123.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: #1d3557;" text="Modificar" textFill="#f1faee" />
+            <Button fx:id="modificarBoton" layoutX="123.0" layoutY="23.0" mnemonicParsing="false" onAction="#modificarTarea" style="-fx-background-color: #1d3557;" text="Modificar" textFill="#f1faee" />
             <Button fx:id="eliminarBoton" layoutX="265.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: #e63946;" text="Eliminar" textFill="#f1faee" />
             <Button fx:id="limpiarBoton" layoutX="378.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: #fdd60a;" text="Limpiar Forma" />
          </children></AnchorPane>
